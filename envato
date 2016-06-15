@@ -1,0 +1,51 @@
+#!/usr/bin/php
+<?php
+require 'classes/ApiClient.php';
+require 'classes/CliParser.php';
+require 'classes/ConfigParser.php';
+
+$config = new ConfigParser('./config.json');
+$api    = new ApiClient($config);
+$cli    = new CliParser($api);
+
+$command = $argv[1];
+$item    = $argv[2];
+
+if (!in_array($command, array('find', 'install', 'list'))) {
+  die(
+    "usage: ./envato command [type|name|id]"        . PHP_EOL .
+    "\tcommand: find, install or list"    . PHP_EOL .
+    "\ttype   : either themes or plugins"    . PHP_EOL .
+    "\tname   : the item to find" . PHP_EOL .
+    "\tid     : the id to install" . PHP_EOL
+  );
+}
+
+if (in_array($command, array('find', 'install')) && !$item) {
+  die("second argument must be suppplied when using find or install" . PHP_EOL);
+}
+
+if ($command == 'list') {
+  if ($item && !in_array($item, array('themes', 'plugins'))) {
+    die("type must either themes or plugins" . PHP_EOL);
+  }
+
+  $cli->list_purchases($item);
+}
+
+if ($command == 'find') {
+  $cli->find_purchases($item);
+}
+
+if ($command == 'install') {
+  if ((int)$item < 1) {
+    die('please provide a valid item id' . PHP_EOL);
+  }
+
+  $purchase = $cli->install_purchase($item);
+
+  echo
+    "\n{$purchase['type']} succesfully installed to {$path}!\n" .
+    "now just run `vagrant up` and go to http://vagrant.local to test it out :)\n";
+}
+
