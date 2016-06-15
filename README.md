@@ -1,4 +1,4 @@
-# Influx WP Boostrap
+# WordPress Envato Purchase Installer
 
 This is the base repository for `content` used in common WordPress projects.
 
