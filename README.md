@@ -23,5 +23,5 @@ cd content
 ./envato find <item-name>
 
 # Install an item by downloading it and unzipping it to either content/themes or content/plugins
-/envato install <item-id>
+./envato install <item-id>
 ```
