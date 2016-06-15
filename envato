@@ -46,6 +46,6 @@ if ($command == 'install') {
 
   echo
     "\n{$purchase['type']} succesfully installed to {$path}!\n" .
-    "now just run `vagrant up` and go to http://vagrant.local to test it out :)\n";
+    "now just `cd ..`, run `vagrant up` and go to http://vagrant.local to test it out :)\n";
 }
 
