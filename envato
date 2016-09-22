@@ -45,7 +45,7 @@ if ($command == 'install') {
   $purchase = $cli->install_purchase($item);
 
   echo
-    "\n{$purchase['type']} succesfully installed to {$path}!\n" .
-    "now just `cd ..`, run `vagrant up` and go to http://vagrant.local to test it out :)\n";
+    PHP_EOL . "{$purchase['type']} succesfully installed to {$path}!" . PHP_EOL .
+    "now just `cd ..`, run `vagrant up` and go to http://vagrant.local to test it out :)" . PHP_EOL;
 }
 
