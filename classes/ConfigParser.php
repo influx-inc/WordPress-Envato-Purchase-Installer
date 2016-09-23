@@ -11,7 +11,17 @@ class ConfigParser {
   public function get_api_key() {
     if (!$this->config['envato_api_key']) {
       do {
-        $this->config['envato_api_key'] = readline("Envato API Key: ");
+       
+ //$this->config['envato_api_key'] = readline("Envato API Key: ");
+ 
+if (PHP_OS == 'WINNT') {
+  echo "Envato API Key: ";
+  $this->config['envato_api_key'] = stream_get_line(STDIN, 1024, PHP_EOL);
+} else {
+  $this->config['envato_api_key'] = readline("Envato API Key: ");
+}
+
+
         $this->save_config();
       } while($this->config['envato_api_key'] == null);
     }
@@ -42,3 +52,6 @@ class ConfigParser {
     file_put_contents($this->config_file, json_encode($this->config));
   }
 }
+
+
+
